@@ -1,7 +1,6 @@
 import sqlite3
 
 def query_person(cursor, person_id):
-    # Query for the person
     cursor.execute('SELECT * FROM person WHERE id=?', (person_id,))
     person = cursor.fetchone()
     if person:
@@ -12,7 +11,6 @@ def query_person(cursor, person_id):
         return False
 
 def query_pets(cursor, person_id):
-    # Query for the person's pets
     cursor.execute('''
     SELECT pet.name, pet.breed, pet.age, pet.dead
     FROM pet
