@@ -26,7 +26,6 @@ def create_tables(cursor):
     ''')
 
 def insert_data(cursor):
-    # Insert data into the person table
     person_data = [
         (1, 'James', 'Smith', 41),
         (2, 'Diana', 'Greene', 23),
@@ -34,8 +33,7 @@ def insert_data(cursor):
         (4, 'William', 'Gibson', 23)
     ]
     cursor.executemany('INSERT INTO person VALUES (?,?,?,?)', person_data)
-    
-    # Insert data into the pet table
+
     pet_data = [
         (1, 'Rusty', 'Dalmatian', 4, 1),
         (2, 'Bella', 'Alaskan Malamute', 3, 0),
@@ -46,7 +44,6 @@ def insert_data(cursor):
     ]
     cursor.executemany('INSERT INTO pet VALUES (?,?,?,?,?)', pet_data)
     
-    # Insert data into the person_pet table
     person_pet_data = [
         (1, 1),
         (1, 2),
@@ -58,17 +55,14 @@ def insert_data(cursor):
     cursor.executemany('INSERT INTO person_pet VALUES (?,?)', person_pet_data)
 
 def main():
-    # Connect to the SQLite database
     conn = sqlite3.connect('pets.db')
     cursor = conn.cursor()
     
-    # Create tables if they don't exist
     create_tables(cursor)
     
-    # Insert the data
     try:
         insert_data(cursor)
-        conn.commit()  # Commit the changes to the database
+        conn.commit()
         print("Data loaded successfully.")
     except sqlite3.IntegrityError:
         print("Data already exists in the database.")
